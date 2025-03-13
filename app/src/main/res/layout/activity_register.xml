@@ -9,15 +9,14 @@
 
     <ImageView
         android:id="@+id/uberLogoLoginPG"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/loginLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/uber"
-        />
+        app:srcCompat="@drawable/uber" />
 
     <LinearLayout
         android:id="@+id/loginLayout"
@@ -35,7 +34,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <EditText
-            android:id="@+id/Username"
+            android:id="@+id/RegisterUsername"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
@@ -48,7 +47,24 @@
             android:inputType="text"
             android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
-            android:textColorHint="#B8000000"
+            android:textColorHint="#A0161111"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/RegisterEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edittex_background"
+            android:drawableStart="@drawable/account_icon"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Email"
+            android:inputType="text"
+            android:textColor="#B8000000"
+            android:textColorHighlight="@android:color/darker_gray"
+            android:textColorHint="#A0161111"
             android:textSize="16sp" />
 
         <EditText
@@ -66,9 +82,27 @@
             android:textAlignment="center"
             android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
-            android:textColorHint="#B8000000"
+            android:textColorHint="#A0161111"
             android:textSize="16sp"
-            tools:hint="Senha"
+            tools:layout_marginBottom="15dp" />
+
+        <EditText
+            android:id="@+id/RegisterConfirmarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edittex_background"
+            android:drawableStart="@drawable/password_icon"
+            android:ems="0"
+            android:gravity="center"
+            android:hint="Digite a Senha Novamente"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="#B8000000"
+            android:textColorHighlight="@android:color/darker_gray"
+            android:textColorHint="#A0161111"
+            android:textSize="16sp"
             tools:layout_marginBottom="15dp" />
 
         <Button
@@ -77,19 +111,11 @@
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_btn_background"
-            android:text="@string/login"
+            android:hint="Registrar"
             android:textColor="@color/white"
+            android:textColorHint="#ffffff"
             app:backgroundTint="@null"
             app:iconTint="@null" />
-
-        <Button
-            android:id="@+id/register_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:text="@string/register_prompt"
-            android:textColor="@android:color/white"
-            app:backgroundTint="@null" />
 
     </LinearLayout>
 
