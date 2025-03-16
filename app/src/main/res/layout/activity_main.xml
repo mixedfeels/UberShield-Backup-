@@ -8,15 +8,95 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="wrap_content"
+    <!-- Header Section: User photo and settings -->
+    <LinearLayout
+        android:id="@+id/LayoutHeader"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- User's photo -->
+        <ImageView
+            android:id="@+id/userPhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/foto_do_usuario"
+            android:src="@drawable/user_photo" />
+
+        <!-- Username -->
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:singleLine="true"
+            android:text="@string/nome_user"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <!-- Settings icon -->
+        <ImageView
+            android:id="@+id/settingsIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/configuracoes"
+            android:src="@drawable/ic_settings" />
+
+    </LinearLayout>
+
+    <!-- Main Content Section -->
+    <LinearLayout
+        android:id="@+id/mapViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/LayoutHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- MapView -->
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/MapaRisco"
+            android:layout_width="350dp"
+            android:layout_height="315dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Button to Proceed -->
+        <Button
+            android:id="@+id/buttonProsseguir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_prosseguir"
+            android:text="@string/deseja_prosseguir_com_a_viagem"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- TextView showing status -->
+        <TextView
+            android:id="@+id/textProblemasViagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/foram_encontrados_5_problemas_na_sua_viagem"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
