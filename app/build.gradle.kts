@@ -32,12 +32,16 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation(libs.volley)
+
+    //glr essa é a dependencia http do servidor, sem isso o banco n funciona, podem estranhar mas n tira nmral
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

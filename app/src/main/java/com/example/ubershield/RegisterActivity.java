@@ -8,42 +8,97 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText usernameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    //SAO SO OS BOTOES E O TEXTO MANO, se nao pegar essa ja aposenta de vez nmral
+    private EditText usernameEditText, passwordEditText, confirmPasswordEditText;
     private Button registerButton;
+    private static final String REGISTER_URL = "http://localhost:3000/criarUsuario"; //NAO ALTERA PELO AMOR, É SERIVODR LOCAL MANO
 
+
+    // mesmo de la encima, eu so to atribuindo botao pqp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         usernameEditText = findViewById(R.id.RegisterUsername);
-        emailEditText = findViewById(R.id.RegisterEmail);
         passwordEditText = findViewById(R.id.RegisterSenha);
         confirmPasswordEditText = findViewById(R.id.RegisterConfirmarSenha);
-        registerButton = findViewById(R.id.Register_btn);
+        registerButton = findViewById(R.id.login_btn);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString().trim();
-                String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
-                if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else if (!password.equals(confirmPassword)) {
-                    Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    registerUser(username, password);
                 }
             }
         });
     }
+
+    private void registerUser(final String username, final String password) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            String status = jsonResponse.getString("status");
+
+                            if (status.equals("success")) {
+                                Toast.makeText(RegisterActivity.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                finish();
+                            } else if (status.equals("exists")) {
+                                Toast.makeText(RegisterActivity.this, "Usuário já existe!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Erro ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(RegisterActivity.this, "Erro no JSON!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterActivity.this, "Erro de conexão: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("nome", username);
+                params.put("senha", password);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }
+// se chegou ate aqui sem deletar meu codigo vcc é rei <3
