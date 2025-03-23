@@ -60,7 +60,9 @@ public class LoginActivity extends AppCompatActivity {
     // requisição de login PELO AMOR NAOOOO TIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <3
     private void login(String username, String password) {
         OkHttpClient client = new OkHttpClient();
-        String url = "http://10.0.2.2:3000/login"; //nao troque pra localhost, descobri depois de me fuder por 2 horas que o emulador do android studio usa 10.0.2.2 e vai crasha seu pc se tentar localhost :D :(
+        String url = "http://10.0.2.2:3000/login"; //link do nosso server
+        //public static final String BASE_URL = "http://10.0.2.2:3000"; comentado pq é o servidor local. ( emulador )
+
         // Enviando dados para o servidor com POST
         RequestBody formBody = new FormBody.Builder()
                 .add("nome", username)

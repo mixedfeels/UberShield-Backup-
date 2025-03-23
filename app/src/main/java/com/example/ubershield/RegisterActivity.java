@@ -26,7 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     //SAO SO OS BOTOES E O TEXTO MANO, se nao pegar essa ja aposenta de vez nmral
     private EditText usernameEditText, passwordEditText, confirmPasswordEditText;
     private Button registerButton;
-    private static final String REGISTER_URL = "http://10.0.2.2:3000/criarUsuario"; //NAO ALTERA PELO AMOR, É SERIVODR LOCAL MANO
+    private static final String REGISTER_URL = "http://10.0.2.2:3000/criarUsuario"; //link do nosso server
+    //public static final String BASE_URL = "http://10.0.2.2:3000"; comentado pq é o servidor local. ( emulador )
 
 
     // mesmo de la encima, eu so to atribuindo botao pqp

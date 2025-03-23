@@ -10,6 +10,7 @@
     <string name="deseja_prosseguir_com_a_viagem">Deseja prosseguir com a viagem?</string>
     <string name="foram_encontrados_5_problemas_na_sua_viagem">Foram encontrados 5 problemas na sua viagem</string>
     <string name="proceed_trip_button">Deseja prosseguir com a viagem?</string>
+    <string name="api_key">AIzaSyARuNKyt_ap96fMqPMQmiNKomH2DjPfjlM</string>
 
 
 </resources>
