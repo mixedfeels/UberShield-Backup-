@@ -6,7 +6,7 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class ApiService {
-    private static final String BASE_URL = "http://SEU_IP:3000";
+    private static final String BASE_URL = "http://10.0.2.2:3000";
     private static final OkHttpClient client = new OkHttpClient();
 
     // Método GET para buscar todos os usuários
