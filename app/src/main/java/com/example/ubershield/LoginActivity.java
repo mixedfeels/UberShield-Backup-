@@ -6,9 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -16,7 +14,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -60,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     // requisição de login PELO AMOR NAOOOO TIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <3
     private void login(String username, String password) {
         OkHttpClient client = new OkHttpClient();
-        String url = "http://10.0.2.2:3000/login"; //link do nosso server
+        String url = "https://ubershieldAPP.azurewebsites.net/user"; //link do nosso server
         //public static final String BASE_URL = "http://10.0.2.2:3000"; comentado pq é o servidor local. ( emulador )
 
         // Enviando dados para o servidor com POST

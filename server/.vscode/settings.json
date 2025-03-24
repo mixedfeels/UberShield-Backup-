@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/1281c0f1-fb61-400e-96be-360e9f88b560/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/UberShieldAPP",
+    "appService.deploySubpath": "."
+}
