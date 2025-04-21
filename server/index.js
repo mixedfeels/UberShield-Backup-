@@ -153,59 +153,6 @@ app.post("/criarUsuario", (req, res) => {
     }
   );
 });
-//rota pra pegar os dados do user pra poder exibir na config user
-app.get("/usuario/:nome", (req, res) => {
-  const nome = req.params.nome.toLowerCase().trim();
-  db.get(
-    `SELECT nome, email, corridas_feitas, media_avaliacao, nome_visivel, tema_escuro FROM users WHERE LOWER(nome) = ?`,
-    [nome],
-    (err, row) => {
-      if (err) {
-        console.error('[ERRO DB]', err.message);
-        return res.status(500).json({ status: 'error', message: 'Erro no servidor' });
-      }
-      if (!row) {
-        return res.status(404).json({ status: 'not_found', message: 'Usuário não encontrado' });
-      }
-      res.json({ status: 'success', user: row });
-    }
-  );
-});
-//atualizacao de nome e email apos confirmacao:
-app.post("/editarUsuario", (req, res) => {
-  const { nome_antigo, novo_nome, novo_email, senha_hash } = req.body;
-  db.get(
-    'SELECT senha_hash FROM users WHERE LOWER(nome) = LOWER(?)',
-    [nome_antigo.toLowerCase()],
-    (err, row) => {
-      if (err || !row || row.senha_hash !== senha_hash) {
-        return res.status(401).json({ status: 'unauthorized', message: 'Senha incorreta' });
-      }
-      db.run(
-        'UPDATE users SET nome = ?, email = ? WHERE LOWER(nome) = ?',
-        [novo_nome, novo_email, nome_antigo.toLowerCase()],
-        function (err) {
-          if (err) return res.status(500).json({ status: 'error', message: 'Erro ao atualizar' });
-          res.json({ status: 'success', message: 'Dados atualizados' });
-        }
-      );
-    }
-  );
-});
-//atualizar config da appconfig
-app.post("/atualizarConfig", (req, res) => {
-  const { nome, tema_escuro, nome_visivel } = req.body;
-  db.run(
-    'UPDATE users SET tema_escuro = ?, nome_visivel = ? WHERE LOWER(nome) = ?',
-    [tema_escuro, nome_visivel, nome.toLowerCase()],
-    function (err) {
-      if (err) return res.status(500).json({ status: 'error', message: 'Erro ao atualizar' });
-      res.json({ status: 'success', message: 'Configurações atualizadas' });
-    }
-  );
-});
-
-
 
 // aqui os tratamentos de erro
 app.use((err, req, res, next) => {
