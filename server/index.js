@@ -163,7 +163,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-//pro server roda
+//log do serverrr
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
