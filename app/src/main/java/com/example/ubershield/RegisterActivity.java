@@ -41,6 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             } else if (!password.equals(confirmPassword)) {
                 Toast.makeText(this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
+            // VERIFICACAO DE EMAIL DO ANDROID. NAO UTILIZAR ATE O FINAL DO APP.
+            /*} else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Email inválido", Toast.LENGTH_SHORT).show();*/
             } else {
                 registerUser(username, email, password);
             }

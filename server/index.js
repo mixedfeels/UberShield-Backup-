@@ -1,183 +1,169 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
-const crypto = require('crypto');
 const sqlite3 = require("sqlite3").verbose();
 const CAMINHO_DB = "banco.db";
-const db = new sqlite3.Database(CAMINHO_DB);
-const crypto = require('crypto');
 
-// Health Check simplificado
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'online', timestamp: Date.now() });
-});
-
-// Tratamento de erros global
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ status: 'error', message: 'Erro interno no servidor' });
-});
-
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
-
-// Nosso endpoint, aqui busca o salt
-app.post('/buscarSalt', (req, res) => {
-    const { nome } = req.body;
-    
-    db.get(
-        'SELECT salt FROM users WHERE nome = ?',
-        [nome],
-        (err, row) => {
-            if (err) {
-                return res.status(500).json({ 
-                    status: 'error', 
-                    message: 'Erro no servidor' 
-                });
-            }
-            
-            if (!row) {
-                return res.status(404).json({ 
-                    status: 'not_found', 
-                    message: 'Usuário não encontrado' 
-                });
-            }
-            
-            res.json({ 
-                status: 'success', 
-                salt: row.salt 
-            });
-        }
-    );
-});
-
-// Inicialização assíncrona do banco
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome TEXT NOT NULL UNIQUE,
-      email TEXT NOT NULL UNIQUE,
-      senha_hash TEXT NOT NULL,
-      salt TEXT NOT NULL
-    )`);
-    
-    console.log('Banco de dados inicializado');
-  });
+// configuracao do banco de dados, se falhar vai dar erro
+const db = new sqlite3.Database(CAMINHO_DB, (err) => {
+  if (err) {
+    console.error("Erro ao conectar ao banco:", err.message);
+    process.exit(1);
+  }
   
-
-// Login do usuario
-app.post("/user", (req, res) => {
-    const { nome, senha_hash } = req.body;
-    
-    db.get(
-        'SELECT senha_hash FROM users WHERE nome = ?',
-        [nome],
-        (err, row) => {
-            if (err) {
-                return res.status(500).json({ 
-                    status: 'error', 
-                    message: 'Erro no servidor' 
-                });
-            }
-            
-            if (!row) {
-                return res.status(401).json({ 
-                    status: 'unauthorized', 
-                    message: 'Credenciais inválidas' 
-                });
-            }
-            
-            if (senha_hash === row.senha_hash) {
-                res.json({ 
-                    status: 'success', 
-                    message: 'Login bem-sucedido' 
-                });
-            } else {
-                res.status(401).json({ 
-                    status: 'unauthorized', 
-                    message: 'Credenciais inválidas' 
-                });
-            }
-        }
-    );
-});
-
-// Inicialização assíncrona do banco
-db.serialize(() => {
+  console.log("Conectado ao banco SQLite");
+  
+  // criacao do DB do ap
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
     senha_hash TEXT NOT NULL,
     salt TEXT NOT NULL
-  )`);
-  
-  console.log('Banco de dados inicializado');
+  )`, (err) => {
+    if (err) {
+      console.error("Erro ao criar tabela:", err.message);
+    } else {
+      console.log("Tabela 'users' verificada/criada com sucesso");
+    }
+  });
 });
 
-// Mantenha essa linha no final
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Servidor rodando na porta ${port}`);
+// nossos middlewares pra post e get
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
 });
 
-// Registro de usuarios é feito aqui, o backend todo ta no app ( endpoint criar usuario )
-app.post("/criarUsuario", function (req, res) {
-    const { 
-        nome, 
-        email,
-        senha_hash, 
-        salt
-    } = req.body;
+// rotas do servidor, cada uma configurada pra dar um erro caso tenha alguma coisa errada, se estiver "servidor mil grau", nao se preocupe com nada.
+app.get('/', (req, res) => res.send('Servidor ta mil grau, rodando tudo OK'));
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
-    db.get(
-        'SELECT id FROM users WHERE nome = ? OR email = ?',
-        [nome, email],
-        (err, row) => {
-            if (err) {
-                return res.status(500).json({ 
-                    status: 'error', 
-                    message: 'Erro no servidor' 
-                });
-            }
-            
-            if (row) {
-                return res.status(409).json({ 
-                    status: 'conflict', 
-                    message: 'Usuário ou email já existem' 
-                });
-            }
-            
-            db.run(
-                `INSERT INTO users (
-                    nome, 
-                    email,
-                    senha_hash, 
-                    salt
-                ) VALUES (?, ?, ?, ?)`,
-                [nome, email, senha_hash, salt],
-                function(err) {
-                    if (err) {
-                        return res.status(500).json({ 
-                            status: 'error', 
-                            message: 'Erro ao criar usuário' 
-                        });
-                    }
-                    
-                    res.json({ 
-                        status: 'success', 
-                        message: 'Usuário criado com sucesso' 
-                    });
-                }
-            );
+app.post('/buscarSalt', (req, res) => {
+  const { nome } = req.body;
+  console.log(`[BUSCAR SALT] Solicitado para: ${nome}`);
+
+  db.get(
+    'SELECT salt FROM users WHERE LOWER(nome) = LOWER(?)',
+    [nome.trim()],
+    (err, row) => {
+      if (err) {
+        console.error('[ERRO DB]', err.message);
+        return res.status(500).json({ 
+          status: 'error', 
+          message: 'Erro no servidor' 
+        });
+      }
+      
+      if (!row) {
+        return res.status(404).json({ 
+          status: 'not_found', 
+          message: 'Usuário não encontrado' 
+        });
+      }
+      
+      res.json({ status: 'success', salt: row.salt });
+    }
+  );
+});
+
+app.post("/user", (req, res) => {
+  const { nome, senha_hash } = req.body;
+  console.log(`[LOGIN] Tentativa de: ${nome}`);
+
+  db.get(
+    'SELECT senha_hash FROM users WHERE LOWER(nome) = LOWER(?)',
+    [nome.trim()],
+    (err, row) => {
+      if (err) {
+        console.error('[ERRO DB]', err.message);
+        return res.status(500).json({ 
+          status: 'error', 
+          message: 'Erro no servidor' 
+        });
+      }
+      
+      if (!row) {
+        return res.status(401).json({ 
+          status: 'unauthorized', 
+          message: 'Credenciais inválidas' 
+        });
+      }
+      
+      if (senha_hash === row.senha_hash) {
+        res.json({ status: 'success', message: 'Login bem-sucedido' });
+      } else {
+        res.status(401).json({ 
+          status: 'unauthorized', 
+          message: 'Credenciais inválidas' 
+        });
+      }
+    }
+  );
+});
+
+app.post("/criarUsuario", (req, res) => {
+  const { nome, email, senha_hash, salt } = req.body;
+  const nomeNormalizado = nome.toLowerCase().trim();
+  console.log(`[REGISTRO] Tentativa: ${nomeNormalizado} (${email})`);
+
+  db.get(
+    'SELECT id FROM users WHERE LOWER(nome) = ? OR email = ?',
+    [nomeNormalizado, email],
+    (err, row) => {
+      if (err) {
+        console.error('[ERRO DB]', err.message);
+        return res.status(500).json({ 
+          status: 'error', 
+          message: 'Erro no servidor' 
+        });
+      }
+      
+      if (row) {
+        console.log('[CONFLITO] Usuário/email já existe');
+        return res.status(409).json({ 
+          status: 'conflict', 
+          message: 'Usuário ou email já existem' 
+        });
+      }
+      
+      db.run(
+        `INSERT INTO users (nome, email, senha_hash, salt) VALUES (?, ?, ?, ?)`,
+        [nomeNormalizado, email, senha_hash, salt],
+        function(err) {
+          if (err) {
+            console.error('[ERRO DB]', err.message);
+            return res.status(500).json({ 
+              status: 'error', 
+              message: 'Erro ao criar usuário' 
+            });
+          }
+          
+          console.log(`[REGISTRO] Sucesso - ID: ${this.lastID}`);
+          res.json({ 
+            status: 'success', 
+            message: 'Usuário criado com sucesso' 
+          });
         }
-    );
+      );
+    }
+  );
 });
 
+// aqui os tratamentos de erro
+app.use((err, req, res, next) => {
+  console.error('[ERRO GLOBAL]', err.stack);
+  res.status(500).json({ 
+    status: 'error', 
+    message: 'Erro interno no servidor' 
+  });
+});
+
+//pro server roda
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+  console.log(`Servidor rodando na porta ${port}`);
 });

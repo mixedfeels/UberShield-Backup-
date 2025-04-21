@@ -1,5 +1,7 @@
 package com.example.ubershield.network;
 
+import android.view.textclassifier.TextLinks;
+
 import okhttp3.*;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -31,7 +33,6 @@ public class ApiService {
                 .add("senha_hash", senhaHash)
                 .add("salt", salt)
                 .build();
-
         Request request = new Request.Builder()
                 .url(BASE_URL + "criarUsuario")
                 .post(body)

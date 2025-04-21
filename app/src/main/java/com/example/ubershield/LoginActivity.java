@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.ubershield.network.Encriptador.PasswordHasher;
+import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -34,13 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim();
+                String username = usernameEditText.getText().toString().trim(); // formatacao do user, trim pra tirar espaco
                 String password = passwordEditText.getText().toString().trim();
 
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    login(username, password); // Chama a função de login
+                    fazerLoginFinal(username, password); // Chama a função de login
                 }
             }
         });
@@ -55,15 +57,55 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // requisição de login PELO AMOR NAOOOO TIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <3
-    private void login(String username, String password) {
+    private void fazerLoginFinal(String username, String password) {
         OkHttpClient client = new OkHttpClient();
-        String url = "https://ubershieldAPP.azurewebsites.net/user"; //link do nosso server
-        //public static final String BASE_URL = "http://10.0.2.2:3000"; comentado pq é o servidor local. ( emulador )
+        String saltUrl = "https://ubershieldAPP.azurewebsites.net/buscarSalt";
 
-        // Enviando dados para o servidor com POST
+        RequestBody body = new FormBody.Builder()
+                .add("nome", username)
+                .build();
+
+        Request saltRequest = new Request.Builder()
+                .url(saltUrl)
+                .post(body)
+                .build();
+
+        client.newCall(saltRequest).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Erro ao buscar salt", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseBody = response.body().string();
+                    try {
+                        JSONObject json = new JSONObject(responseBody);
+                        String salt = json.getString("salt");
+
+                        // Faz o hash com sua classe
+                        String senhaHash = PasswordHasher.hashPassword(password, salt);
+
+                        // Agora envia para o backend
+                        fazerLoginComHash(username, senhaHash);
+                    } catch (Exception e) {
+                        runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Erro ao processar salt", Toast.LENGTH_SHORT).show());
+                    }
+                } else {
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Usuário não encontrado", Toast.LENGTH_SHORT).show());
+                }
+            }
+        });
+    }
+
+    private void fazerLoginComHash(String username, String senhaHash) {
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://ubershieldAPP.azurewebsites.net/user";
+
         RequestBody formBody = new FormBody.Builder()
                 .add("nome", username)
-                .add("senha", password)
+                .add("senha_hash", senhaHash)
                 .build();
 
         Request request = new Request.Builder()
@@ -71,31 +113,24 @@ public class LoginActivity extends AppCompatActivity {
                 .post(formBody)
                 .build();
 
-        // Enviando a requisição
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> {
-                    Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Erro: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    // Sucesso no login, redireciona para a próxima tela
                     runOnUiThread(() -> {
-                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class); // Alterar para a tela principal
-                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     });
                 } else {
-                    // Erro no login
-                    runOnUiThread(() -> {
-                        Toast.makeText(LoginActivity.this, "Login Failed: " + response.message(), Toast.LENGTH_SHORT).show();
-                    });
+                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Login falhou: " + response.message(), Toast.LENGTH_SHORT).show());
                 }
             }
         });
     }
+
 }

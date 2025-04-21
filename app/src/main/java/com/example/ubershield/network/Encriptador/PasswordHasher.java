@@ -8,6 +8,8 @@ import java.security.spec.InvalidKeySpecException;
 
 public class PasswordHasher {
 
+
+
     // nossa chave aí, bem deboa graças a Deus.
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
     private static final int ITERATIONS = 100000;
@@ -30,3 +32,4 @@ public class PasswordHasher {
         }
     }
 }
+
