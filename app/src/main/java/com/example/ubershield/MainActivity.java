@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         // aqui eu configuro o botao homeButton para sempre ir pra tela de config do usuario ( copia e cola se tiver um accountButton na sua activity )
         accountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class); // Esta faltando O UseConfig.java na class
+            Intent intent = new Intent(MainActivity.this, UserConfigActivity.class);
             startActivity(intent);
         });
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         // mesma coisa dos de cima, só que pra configuracoes do app.
         configButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class); // Esta faltando O UseConfig.java na class
+            Intent intent = new Intent(MainActivity.this, AppConfigActivity.class);
             startActivity(intent);
         });
 
