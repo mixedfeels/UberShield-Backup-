@@ -26,19 +26,19 @@
         <!-- User's photo -->
         <ImageView
             android:id="@+id/userPhoto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/foto_do_usuario"
-            android:src="@drawable/user_photo" />
+            android:src="@drawable/profile_circle" />
 
         <!-- Username -->
         <TextView
             android:id="@+id/userName"
             style="@style/UserNameStyle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:textSize="18sp"
             android:text="@string/nome_user"
             android:textColor="?android:attr/textColorPrimary" />
 
@@ -59,11 +59,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
+
         <!-- MapView -->
-        <com.google.android.gms.maps.MapView
+        <!-- <com.google.android.gms.maps.MapView
             android:id="@+id/MapaRisco"
             android:layout_width="match_parent"
             android:layout_height="340dp"
+            android:layout_marginBottom="16dp" /> -->
+
+        <!-- Texto até decidir o Mapa/Risco ou aviso geral -->
+        <EditText
+            android:id="@+id/avisoGeral"
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:background="#e6e6e6"
             android:layout_marginBottom="16dp" />
 
         <!-- Button to Proceed -->
@@ -72,16 +81,16 @@
             style="@style/ButtonPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/deseja_prosseguir_com_a_viagem" />
+            android:text="@string/prosseguir_viagem" />
 
         <!-- TextView showing status -->
-        <TextView
+        <!-- <TextView
             android:id="@+id/textProblemasViagem"
             style="@style/StatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="problemas encontrados na sua viagem:"
-            android:textColor="?android:attr/textColorPrimary" />
+            android:textColor="?android:attr/textColorPrimary" /> -->
 
     </LinearLayout>
 
@@ -99,28 +108,31 @@
         app:layout_constraintVertical_bias="0.979">
 
         <ImageButton
-            android:id="@+id/accountbutton"
+            android:id="@+id/accountButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/account_icon" />
+            app:srcCompat="@drawable/account_icon"
+            android:contentDescription="Perfil"/>
 
         <ImageButton
-            android:id="@+id/homebutton"
+            android:id="@+id/homeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/home_icon" />
+            app:srcCompat="@drawable/home_icon"
+            android:contentDescription="Início"/>
 
         <ImageButton
-            android:id="@+id/configbutton"
+            android:id="@+id/configButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_settings" />
+            app:srcCompat="@drawable/ic_settings"
+            android:contentDescription="Configurações"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,10 +4,10 @@
     <string name="register_prompt">Não tem uma conta? Registre-se</string>
     <string name="powered_by">Powered by Grupo 18</string>
     <string name="password">Senha</string>
-    <string name="nome_user">ge</string>
+    <string name="nome_user">Usuário</string>
     <string name="foto_do_usuario">Foto do usuário</string>
     <string name="configuracoes">Configurações</string>
-    <string name="deseja_prosseguir_com_a_viagem">Deseja prosseguir com a viagem?</string>
+    <string name="prosseguir_viagem">Prosseguir com a viagem</string>
     <string name="foram_encontrados_5_problemas_na_sua_viagem">Foram encontrados 5 problemas na sua viagem</string>
     <string name="proceed_trip_button">Deseja prosseguir com a viagem?</string>
     <string name="api_key">AIzaSyARuNKyt_ap96fMqPMQmiNKomH2DjPfjlM</string>
