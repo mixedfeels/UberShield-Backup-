@@ -2,6 +2,7 @@ package com.example.ubershield;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton accountButton, homeButton, configButton;
+    private Button buttonProsseguir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Referencia dos botoes
-        accountButton = findViewById(R.id.accountbutton);
-        homeButton = findViewById(R.id.homebutton);
-        configButton = findViewById(R.id.configbutton);
+        accountButton = findViewById(R.id.accountButton);
+        homeButton = findViewById(R.id.homeButton);
+        configButton = findViewById(R.id.configButton);
+        buttonProsseguir = findViewById(R.id.buttonProsseguir);
 
         // aqui eu configuro o botao homeButton para sempre ir pra tela de config do usuario ( copia e cola se tiver um accountButton na sua activity )
         accountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, UserConfigActivity.class);
+            Intent intent = new Intent(MainActivity.this, MainActivity.class); // Esta faltando O UseConfig.java na class
             startActivity(intent);
         });
 
@@ -46,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         // mesma coisa dos de cima, só que pra configuracoes do app.
         configButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AppConfigActivity.class);
+            Intent intent = new Intent(MainActivity.this, MainActivity.class); // Esta faltando O UseConfig.java na class
+            startActivity(intent);
+        });
+
+        // Ao pressionar o botão de prosseguir com a viagem ele vai para o Mapa
+        buttonProsseguir.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
         });
     }

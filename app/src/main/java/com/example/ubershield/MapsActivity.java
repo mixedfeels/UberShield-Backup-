@@ -69,7 +69,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Places.initialize(getApplicationContext(), "SUA_API_KEY");
         }
 
-        // Configuração da barra de pesquisa de locais (AutocompleteSupportFragment)
+        // Configuração da barra de pesquisa de locais (AutocompleteSupportFragment) AINDA NÃO COMPLETO
+        /*
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocompleteFragment.getView().setFocusable(true);
@@ -94,6 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e("PLACES_ERROR", "Erro ao selecionar local: " + status);
             }
         });
+        */
     }
 
     @Override
@@ -132,15 +134,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     // Ativa a localização do usuário no mapa
     private void enableMyLocation() {
         if (hasLocationPermission()) {
-            mMap.setMyLocationEnabled(true);
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, location -> {
-                        if (location != null) {
-                            updateLocationOnMap(location);
-                        } else {
-                            Toast.makeText(MapsActivity.this, "Não foi possível obter a localização.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            try {
+                mMap.setMyLocationEnabled(true);
+            } catch (SecurityException e) {
+                Log.e("LOCATION_PERMISSION", "Permissão não concedida para mostrar a localização.", e);
+            }
         }
     }
 
@@ -261,16 +259,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Seleciona um destino e traça uma rota a partir da localização atual
     private void selecionarDestino(LatLng destino) {
-        if (mMap != null && destino != null) {
-            mMap.clear();
-            mMap.addMarker(new MarkerOptions().position(destino).title("Destino"));
-
-            fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
-                if (location != null) {
-                    LatLng origem = new LatLng(location.getLatitude(), location.getLongitude());
-                    getRoute(origem, destino);
-                }
-            });
+        if (hasLocationPermission()) {
+            try {
+                fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+                    if (location != null) {
+                        LatLng origem = new LatLng(location.getLatitude(), location.getLongitude());
+                        getRoute(origem, destino);
+                    }
+                });
+            } catch (SecurityException e) {
+                Log.e("LOCATION_PERMISSION", "Erro ao obter localização para traçar rota.", e);
+            }
+        } else {
+            Toast.makeText(this, "Permissão de localização não concedida.", Toast.LENGTH_SHORT).show();
         }
     }
 }
