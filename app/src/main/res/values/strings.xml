@@ -7,7 +7,7 @@
     <string name="nome_user">Usuário</string>
     <string name="foto_do_usuario">Foto do usuário</string>
     <string name="configuracoes">Configurações</string>
-    <string name="prosseguir_viagem">Prosseguir com a viagem</string>
+    <string name="prosseguir_viagem">Visualizar Mapa</string>
     <string name="foram_encontrados_5_problemas_na_sua_viagem">Foram encontrados 5 problemas na sua viagem</string>
     <string name="proceed_trip_button">Deseja prosseguir com a viagem?</string>
     <string name="api_key">AIzaSyARuNKyt_ap96fMqPMQmiNKomH2DjPfjlM</string>

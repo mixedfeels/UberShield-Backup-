@@ -48,6 +48,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private final String apiKey = "AIzaSyAImNj7rOAA2OooqZ20y-r8Jfbz9Go8gAc";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Inicializa o serviço Places da Google
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "SUA_API_KEY");
+            Places.initialize(getApplicationContext(), apiKey);
         }
 
         // Configuração da barra de pesquisa de locais (AutocompleteSupportFragment) AINDA NÃO COMPLETO
@@ -94,8 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onError(@NonNull Status status) {
                 Log.e("PLACES_ERROR", "Erro ao selecionar local: " + status);
             }
-        });
-        */
+        }); */
     }
 
     @Override
@@ -192,7 +192,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // Obtém a rota entre dois pontos usando a API Google Directions
     private void getRoute(LatLng origem, LatLng destino) {
-        String apiKey = "SUA_API_KEY";
         String url = "https://maps.googleapis.com/maps/api/directions/json?"
                 + "origin=" + origem.latitude + "," + origem.longitude
                 + "&destination=" + destino.latitude + "," + destino.longitude
