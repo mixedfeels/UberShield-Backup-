@@ -1,7 +1,9 @@
-package com.example.ubershield;
+package br.fecap.pi.ubershield;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import br.fecap.pi.ubershield.R;
 
 public class AppConfigActivity extends AppCompatActivity {
     @Override

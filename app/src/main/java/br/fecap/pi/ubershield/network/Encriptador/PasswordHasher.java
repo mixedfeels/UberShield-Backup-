@@ -1,4 +1,4 @@
-package com.example.ubershield.network.Encriptador;
+package br.fecap.pi.ubershield.network.Encriptador;
 
 import android.util.Base64;
 import javax.crypto.SecretKeyFactory;

@@ -1,4 +1,4 @@
-package com.example.ubershield;
+package br.fecap.pi.ubershield;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.ubershield.network.Encriptador.PasswordHasher;
+
+import br.fecap.pi.ubershield.R;
+
+import br.fecap.pi.ubershield.network.Encriptador.PasswordHasher;
 import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Callback;

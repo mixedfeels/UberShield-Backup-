@@ -1,6 +1,4 @@
-package com.example.ubershield.network;
-
-import android.view.textclassifier.TextLinks;
+package br.fecap.pi.ubershield.network;
 
 import okhttp3.*;
 import org.json.JSONObject;

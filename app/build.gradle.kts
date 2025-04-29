@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ubershield"
+    namespace = "br.fecap.pi.ubershield"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.ubershield"
+        applicationId = "br.fecap.pi.ubershield"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

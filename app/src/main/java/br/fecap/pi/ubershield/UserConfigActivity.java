@@ -1,8 +1,11 @@
-package com.example.ubershield;
+package br.fecap.pi.ubershield;
 import android.content.Intent;
 import android.widget.ImageButton;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import br.fecap.pi.ubershield.R;
+
 public class UserConfigActivity extends AppCompatActivity {
 
     private ImageButton voltarBtn;
