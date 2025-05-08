@@ -1,17 +1,21 @@
 package br.fecap.pi.ubershield.network.frontend;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.fecap.pi.ubershield.R;
-
-import br.fecap.pi.ubershield.network.backend.PasswordHasher;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
+import br.fecap.pi.ubershield.R;
+import br.fecap.pi.ubershield.network.backend.PasswordHasher;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -19,7 +23,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,30 +39,23 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_btn);
         registerButton = findViewById(R.id.register_btn);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim(); // formatacao do user, trim pra tirar espaco
-                String password = passwordEditText.getText().toString().trim();
+        loginButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    fazerLoginFinal(username, password); // Chama a função de login
-                }
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            } else {
+                fazerLoginFinal(username, password);
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 
-    // requisição de login PELO AMOR NAOOOO TIRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <3
     private void fazerLoginFinal(String username, String password) {
         OkHttpClient client = new OkHttpClient();
         String saltUrl = "https://ubershieldAPP.azurewebsites.net/buscarSalt";
@@ -87,10 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject json = new JSONObject(responseBody);
                         String salt = json.getString("salt");
 
-                        // Faz o hash com sua classe
                         String senhaHash = PasswordHasher.hashPassword(password, salt);
-
-                        // Agora envia para o backend
                         fazerLoginComHash(username, senhaHash);
                     } catch (Exception e) {
                         runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Erro ao processar salt", Toast.LENGTH_SHORT).show());
@@ -127,6 +120,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> {
                         Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response.body().string());
+                            String nome = jsonResponse.getString("nome");
+
+                            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                            prefs.edit().putString("nomeUsuario", nome).apply();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     });
                 } else {
@@ -135,5 +139,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 }
