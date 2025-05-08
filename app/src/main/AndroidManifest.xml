@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+<<<<<<< Updated upstream
+=======
+
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+>>>>>>> Stashed changes
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" android:maxSdkVersion="29"/>
+<<<<<<< Updated upstream
+=======
+    <uses-permission android:name="android.permission.SEND_SMS" />
+>>>>>>> Stashed changes
 
     <application
         android:allowBackup="true"
