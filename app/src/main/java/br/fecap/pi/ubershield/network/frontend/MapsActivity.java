@@ -1,4 +1,4 @@
-package br.fecap.pi.ubershield.network.FrontEnd;
+package br.fecap.pi.ubershield.network.frontend;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

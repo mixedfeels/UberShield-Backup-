@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context="br.fecap.pi.ubershield.network.frontend.UserConfigActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_config"

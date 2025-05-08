@@ -1,4 +1,4 @@
-package br.fecap.pi.ubershield.network.FrontEnd;
+package br.fecap.pi.ubershield.network.frontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import br.fecap.pi.ubershield.R;
 
-import br.fecap.pi.ubershield.network.BackEnd.ApiService;
-import br.fecap.pi.ubershield.network.BackEnd.PasswordHasher;
+import br.fecap.pi.ubershield.network.backend.ApiService;
+import br.fecap.pi.ubershield.network.backend.PasswordHasher;
 
 import java.util.UUID;
 

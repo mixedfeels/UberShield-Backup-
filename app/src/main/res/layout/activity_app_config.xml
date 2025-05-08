@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context="br.fecap.pi.ubershield.FrontEnd.AppConfigActivity">
+    tools:context="br.fecap.pi.ubershield.network.frontend.AppConfigActivity">
 
     <ImageView
         android:id="@+id/uberLogo"

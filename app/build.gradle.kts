@@ -45,6 +45,7 @@ dependencies {
 
     //glr essa é a dependencia http do servidor, sem isso o banco n funciona, podem estranhar mas n tira nmral
     implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation(libs.biometric)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
