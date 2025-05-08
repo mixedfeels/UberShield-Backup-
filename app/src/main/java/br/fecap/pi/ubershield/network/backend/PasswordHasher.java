@@ -1,4 +1,4 @@
-package br.fecap.pi.ubershield.network.BackEnd;
+package br.fecap.pi.ubershield.network.backend;
 
 import android.util.Base64;
 import javax.crypto.SecretKeyFactory;

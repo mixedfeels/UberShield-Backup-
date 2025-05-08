@@ -14,15 +14,20 @@ import br.fecap.pi.ubershield.R;
 public class UserConfigActivity extends AppCompatActivity {
 
     private ImageButton voltarBtn;
-    EditText editContact1 = findViewById(R.id.editContact1);
-    EditText editContact2 = findViewById(R.id.editContact2);
-    EditText editContact3 = findViewById(R.id.editContact3);
-    Button btnSaveContacts = findViewById(R.id.btnSaveContacts);
+    private EditText editContact1;
+    private EditText editContact2;
+    private EditText editContact3;
+    private Button btnSaveContacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_config);
+
+        EditText editContact1 = findViewById(R.id.editContact1);
+        EditText editContact2 = findViewById(R.id.editContact2);
+        EditText editContact3 = findViewById(R.id.editContact3);
+        Button btnSaveContacts = findViewById(R.id.btnSaveContacts);
 
         SharedPreferences prefs = getSharedPreferences("EmergencyContacts", MODE_PRIVATE);
         editContact1.setText(prefs.getString("contact1", ""));
@@ -44,7 +49,7 @@ public class UserConfigActivity extends AppCompatActivity {
         voltarBtn = findViewById(R.id.btnBack);
         //eeh, o codigo basico pra ir pra home ao clicar pra voltar
         voltarBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(UserConfigActivity.this, MainActivity.class);
+            Intent intent = new Intent(UserConfigActivity.this, br.fecap.pi.ubershield.network.frontend.MainActivity);
             startActivity(intent);
         });
     }
