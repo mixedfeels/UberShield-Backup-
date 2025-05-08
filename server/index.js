@@ -153,6 +153,28 @@ app.post("/criarUsuario", (req, res) => {
     }
   );
 });
+// rota para obter o nome do usuario a partir do aplicativo.
+app.post("/obterDadosUsuario", (req, res) => {
+  const { nome } = req.body;
+  console.log(`[OBTER DADOS] Solicitado para: ${nome}`);
+
+  db.get(
+    'SELECT nome, email FROM users WHERE LOWER(nome) = LOWER(?)',
+    [nome.trim()],
+    (err, row) => {
+      if (err) {
+        console.error('[ERRO DB]', err.message);
+        return res.status(500).json({ status: 'error', message: 'Erro no servidor' });
+      }
+
+      if (!row) {
+        return res.status(404).json({ status: 'not_found', message: 'Usuário não encontrado' });
+      }
+
+      res.json({ status: 'success', nome: row.nome, email: row.email });
+    }
+  );
+});
 
 // aqui os tratamentos de erro
 app.use((err, req, res, next) => {
