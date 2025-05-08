@@ -1,4 +1,4 @@
-package br.fecap.pi.ubershield.network.BackEnd;
+package br.fecap.pi.ubershield.network.backend;
 
 import okhttp3.*;
 import org.json.JSONObject;
