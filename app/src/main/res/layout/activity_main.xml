@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="br.fecap.pi.ubershield.MainActivity">
+    tools:context="br.fecap.pi.ubershield.FrontEnd.MainActivity">
 
     <!-- Header Section: User photo and settings -->
     <LinearLayout

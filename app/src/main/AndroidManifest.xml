@@ -23,7 +23,7 @@
             android:value="AIzaSyAImNj7rOAA2OooqZ20y-r8Jfbz9Go8gAc" />
 
         <activity
-            android:name="br.fecap.pi.ubershield.LoginActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +32,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.fecap.pi.ubershield.MainActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.MainActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.RegisterActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.AppConfigActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.AppConfigActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.UserConfigActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.UserConfigActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.MapsActivity"
+            android:name="br.fecap.pi.ubershield.FrontEnd.MapsActivity"
             android:exported="true" />
     </application>
 
