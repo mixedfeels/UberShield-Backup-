@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import br.fecap.pi.ubershield.R;
 
-import br.fecap.pi.ubershield.network.BackEnd.PasswordHasher;
+import br.fecap.pi.ubershield.network.backend.PasswordHasher;
 import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Callback;
