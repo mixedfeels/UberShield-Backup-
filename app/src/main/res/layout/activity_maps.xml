@@ -12,6 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageButton
+        android:id="@+id/safetyButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:layout_marginStart="339dp"
+        android:background="@drawable/rounded_button"
+        android:contentDescription="Botão de segurança" />
+
     <!-- Fragmento de Pesquisa ainda não funcional -->
     <!-- <fragment
         android:id="@+id/autocomplete_fragment"

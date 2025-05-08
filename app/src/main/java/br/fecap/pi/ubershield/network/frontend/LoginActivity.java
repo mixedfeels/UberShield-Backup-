@@ -3,15 +3,19 @@ package br.fecap.pi.ubershield.network.frontend;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import br.fecap.pi.ubershield.R;
 import br.fecap.pi.ubershield.network.backend.PasswordHasher;
-
-import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -19,8 +23,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Requisição de login
     private void fazerLoginFinal(String username, String password) {
         OkHttpClient client = new OkHttpClient();
         String saltUrl = "https://ubershieldAPP.azurewebsites.net/buscarSalt";
@@ -82,10 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject json = new JSONObject(responseBody);
                         String salt = json.getString("salt");
 
-                        // Faz o hash com a senha usando a classe PasswordHasher
                         String senhaHash = PasswordHasher.hashPassword(password, salt);
-
-                        // Agora envia para o backend com o hash
                         fazerLoginComHash(username, senhaHash);
                     } catch (Exception e) {
                         runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Erro ao processar salt", Toast.LENGTH_SHORT).show());
@@ -97,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Envia o hash da senha para autenticação
     private void fazerLoginComHash(String username, String senhaHash) {
         OkHttpClient client = new OkHttpClient();
         String url = "https://ubershieldAPP.azurewebsites.net/user";
@@ -124,17 +121,16 @@ public class LoginActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
-                        // Salva o nome do usuário no SharedPreferences
-                        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         try {
                             JSONObject jsonResponse = new JSONObject(response.body().string());
                             String nome = jsonResponse.getString("nome");
+
+                            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                             prefs.edit().putString("nomeUsuario", nome).apply();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        // Redireciona para a MainActivity após login bem-sucedido
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     });
                 } else {

@@ -128,7 +128,71 @@
             app:layout_constraintTop_toBottomOf="@+id/btnEditInfo"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <!-- Adicione abaixo do botão Editar Informações, dentro do ConstraintLayout -->
+
+        <!-- Contatos de Emergência -->
+        <TextView
+            android:id="@+id/labelEmergency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contatos de Emergência"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/btnEditInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editContact1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Contato 1 (com DDD)"
+            android:inputType="phone"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B3B3B3"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/labelEmergency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editContact2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Contato 2 (com DDD)"
+            android:inputType="phone"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B3B3B3"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/editContact1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editContact3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Contato 3 (com DDD)"
+            android:inputType="phone"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B3B3B3"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/editContact2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btnSaveContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salvar Contatos"
+            android:textColor="#000000"
+            android:backgroundTint="#FFC400"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/editContact3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
