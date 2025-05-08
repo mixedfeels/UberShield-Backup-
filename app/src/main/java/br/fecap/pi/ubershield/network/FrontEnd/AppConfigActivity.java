@@ -1,4 +1,4 @@
-package br.fecap.pi.ubershield;
+package br.fecap.pi.ubershield.network.FrontEnd;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
