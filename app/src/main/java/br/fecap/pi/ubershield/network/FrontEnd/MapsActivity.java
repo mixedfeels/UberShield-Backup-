@@ -2,270 +2,113 @@ package br.fecap.pi.ubershield.network.frontend;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.*;
+
 import br.fecap.pi.ubershield.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.libraries.places.api.Places;
+import br.fecap.pi.ubershield.network.backend.UberShieldService;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+public class MapsActivity extends AppCompatActivity {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
-    private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private final String apiKey = "AIzaSyAImNj7rOAA2OooqZ20y-r8Jfbz9Go8gAc";
+    private FusedLocationProviderClient fusedLocationClient;
+    private LocationCallback locationCallback;
+    private Location lastLocation;
+    private long lastLocationTime = 0;
+
+    private UberShieldService uberShieldService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        // Inicializa o cliente de localização
+        // Inicializa o serviço de segurança
+        uberShieldService = new UberShieldService(this);
+
+        // Inicializa o provedor de localização
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Obtém o fragmento do mapa e inicializa o callback
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
+        // Botão de segurança
+        Button safetyButton = findViewById(R.id.safetyButton);
+        safetyButton.setOnClickListener(v -> uberShieldService.startSafetyCheck());
+
+        // Inicia atualizações de localização
+        startLocationUpdates();
+    }
+
+    private void startLocationUpdates() {
+        // Verifica permissão de localização
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+            return;
         }
 
-        // Inicializa o serviço Places da Google
-        if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), apiKey);
-        }
+        // Configura a requisição de localização
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(60000); // Atualiza a cada 1 minuto
+        locationRequest.setFastestInterval(50000); // Intervalo mais rápido
+        locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY); // Alta precisão
 
-        // Configuração da barra de pesquisa de locais (AutocompleteSupportFragment) AINDA NÃO COMPLETO
-        /*
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-        autocompleteFragment.getView().setFocusable(true);
-        autocompleteFragment.getView().setFocusableInTouchMode(true);
-        autocompleteFragment.getView().requestFocus();
-
-        // Define os campos desejados na pesquisa
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.LAT_LNG, Place.Field.NAME));
-
-        // Listener para quando um local for selecionado
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        // Callback para atualizações de localização
+        locationCallback = new LocationCallback() {
             @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                LatLng destino = place.getLatLng();
-                if (destino != null) {
-                    selecionarDestino(destino);
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                Location currentLocation = locationResult.getLastLocation();
+                if (currentLocation != null) {
+                    // Verifica se a localização anterior existe
+                    if (lastLocation != null) {
+                        float distance = currentLocation.distanceTo(lastLocation);
+                        if (distance < 10) { // Considera parado se mover menos de 10 metros
+                            long timeStopped = System.currentTimeMillis() - lastLocationTime;
+                            if (timeStopped > 60000) { // Se estiver parado há mais de 1 minuto
+                                Toast.makeText(MapsActivity.this, "Você está parado há mais de 1 minuto!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    // Atualiza última localização e tempo
+                    lastLocation = currentLocation;
+                    lastLocationTime = System.currentTimeMillis();
                 }
             }
+        };
 
-            @Override
-            public void onError(@NonNull Status status) {
-                Log.e("PLACES_ERROR", "Erro ao selecionar local: " + status);
-            }
-        }); */
+        // Inicia atualizações
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, getMainLooper());
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(false);
-
-        // Verifica e solicita permissões de localização
-        if (!hasLocationPermission()) {
-            requestLocationPermission();
-        } else {
-            enableMyLocation();
-        }
-
-        // Aplica um estilo personalizado ao mapa
-        applyMapStyle();
-
-        // Ajusta a posição do botão de localização
-        repositionLocationButton();
-    }
-
-    // Verifica se as permissões de localização foram concedidas
-    private boolean hasLocationPermission() {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    // Solicita permissões de localização ao usuário
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOCATION_PERMISSION_REQUEST_CODE);
-    }
-
-    // Ativa a localização do usuário no mapa
-    private void enableMyLocation() {
-        if (hasLocationPermission()) {
-            try {
-                mMap.setMyLocationEnabled(true);
-            } catch (SecurityException e) {
-                Log.e("LOCATION_PERMISSION", "Permissão não concedida para mostrar a localização.", e);
-            }
+    protected void onPause() {
+        super.onPause();
+        // Para atualizações quando a activity for pausada
+        if (fusedLocationClient != null && locationCallback != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
 
-    // Aplica um estilo personalizado ao mapa usando um arquivo JSON
-    private void applyMapStyle() {
-        try {
-            boolean success = mMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style)
-            );
-            if (!success) {
-                Log.e("MAP_STYLE", "Erro ao aplicar o estilo!");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e("MAP_STYLE", "Arquivo de estilo não encontrado!", e);
-        }
-    }
-
-    // Ajusta a posição do botão de localização no layout
-    private void repositionLocationButton() {
-        View mapView = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getView();
-        if (mapView != null) {
-            View locationButton = mapView.findViewWithTag("GoogleMapMyLocationButton");
-            if (locationButton != null) {
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-                layoutParams.setMargins(0, 0, 30, 200);
-            }
-        }
-    }
-
-    // Atualiza a posição do usuário no mapa
-    private void updateLocationOnMap(Location location) {
-        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.clear(); // Remove marcadores antigos
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15)); // Define um nível de zoom
-    }
-
-    // Responde à solicitação de permissão do usuário
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                enableMyLocation();
+            if (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates(); // Se o usuário concedeu a permissão
             } else {
-                Toast.makeText(this, "Permissão de localização negada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permissão de localização negada", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-
-    // Obtém a rota entre dois pontos usando a API Google Directions
-    private void getRoute(LatLng origem, LatLng destino) {
-        String url = "https://maps.googleapis.com/maps/api/directions/json?"
-                + "origin=" + origem.latitude + "," + origem.longitude
-                + "&destination=" + destino.latitude + "," + destino.longitude
-                + "&mode=driving"
-                + "&key=" + apiKey;
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        JSONArray routes = response.getJSONArray("routes");
-                        if (routes.length() > 0) {
-                            JSONObject route = routes.getJSONObject(0);
-                            JSONObject overviewPolyline = route.getJSONObject("overview_polyline");
-                            String encodedPolyline = overviewPolyline.getString("points");
-
-                            List<LatLng> points = decodePolyline(encodedPolyline);
-                            PolylineOptions polylineOptions = new PolylineOptions()
-                                    .addAll(points)
-                                    .color(Color.BLUE)
-                                    .width(10);
-                            mMap.addPolyline(polylineOptions);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> Log.e("ROUTE_ERROR", "Erro ao obter rota: " + error.getMessage())
-        );
-
-        queue.add(jsonObjectRequest);
-    }
-
-    // Decodifica a polyline recebida da API para obter os pontos da rota
-    private List<LatLng> decodePolyline(String encoded) {
-        List<LatLng> polyline = new ArrayList<>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
-
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            polyline.add(new LatLng(lat / 1E5, lng / 1E5));
-        }
-        return polyline;
-    }
-
-    // Seleciona um destino e traça uma rota a partir da localização atual
-    private void selecionarDestino(LatLng destino) {
-        if (hasLocationPermission()) {
-            try {
-                fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
-                    if (location != null) {
-                        LatLng origem = new LatLng(location.getLatitude(), location.getLongitude());
-                        getRoute(origem, destino);
-                    }
-                });
-            } catch (SecurityException e) {
-                Log.e("LOCATION_PERMISSION", "Erro ao obter localização para traçar rota.", e);
-            }
-        } else {
-            Toast.makeText(this, "Permissão de localização não concedida.", Toast.LENGTH_SHORT).show();
         }
     }
 }
