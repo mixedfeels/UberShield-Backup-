@@ -61,4 +61,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:18.0.0")
     implementation("com.google.android.libraries.places:places:2.7.0")
     implementation("com.google.android.gms:play-services-places:17.0.0")
+    implementation ("androidx.biometric:biometric:1.1.0")
 }
