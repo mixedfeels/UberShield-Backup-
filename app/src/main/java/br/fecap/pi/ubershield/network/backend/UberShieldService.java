@@ -3,20 +3,16 @@ package br.fecap.pi.ubershield.network.backend;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 import android.util.Log;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import android.widget.Toast;
 
-import java.util.concurrent.Executor;
+import androidx.appcompat.app.AlertDialog;
 
 public class UberShieldService {
 
     private final Context context;
     private final EmergencyContactManager contactManager;
+    private final BiometricAuth biometricAuth;
     private int failedAttempts = 0;
 
     private static final String TAG = "UBERSHIELD";
@@ -24,6 +20,7 @@ public class UberShieldService {
     public UberShieldService(Context context) {
         this.context = context;
         this.contactManager = new EmergencyContactManager(context);
+        this.biometricAuth = new BiometricAuth(context);
     }
 
     // Inicia a verificação de segurança
@@ -40,38 +37,28 @@ public class UberShieldService {
         });
     }
 
-    // Inicia a verificação biométrica
+    // Inicia a verificação biométrica usando a classe BiometricAuth
     private void startBiometricVerification() {
-        Executor executor = ContextCompat.getMainExecutor(context);
-        BiometricPrompt.AuthenticationCallback callback = new BiometricPrompt.AuthenticationCallback() {
+        biometricAuth.showBiometricPrompt(new BiometricAuth.AuthCallback() {
             @Override
-            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+            public void onSuccess() {
                 Log.d(TAG, "Biometria autenticada com sucesso.");
                 Toast.makeText(context, "Verificação bem-sucedida!", Toast.LENGTH_SHORT).show();
                 failedAttempts = 0;
             }
 
             @Override
-            public void onAuthenticationFailed() {
+            public void onFailure() {
                 failedAttempts++;
+                Log.d(TAG, "Falha na autenticação biométrica. Tentativas: " + failedAttempts);
                 if (failedAttempts >= 2) {
                     triggerEmergencyProtocol();
                 } else {
                     Toast.makeText(context, "Falha na autenticação. Tente novamente.", Toast.LENGTH_SHORT).show();
-                    startBiometricVerification();
+                    startBiometricVerification(); // Tenta novamente
                 }
             }
-        };
-
-        BiometricPrompt biometricPrompt = new BiometricPrompt((FragmentActivity) context, executor, callback);
-
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Confirmação de Segurança")
-                .setSubtitle("Toque no sensor biométrico para confirmar")
-                .setNegativeButtonText("Cancelar")
-                .build();
-
-        biometricPrompt.authenticate(promptInfo);
+        });
     }
 
     // Aciona o protocolo de emergência
