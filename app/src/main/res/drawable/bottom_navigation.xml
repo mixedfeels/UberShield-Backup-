@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home" android:title="Página Inicial" android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/nav_grupos" android:title="Grupos" android:icon="@drawable/ic_groups"/>
+    <item android:id="@+id/nav_atividades" android:title="Atividades" android:icon="@drawable/ic_event"/>
+    <item android:id="@+id/nav_perfil" android:title="Perfil" android:icon="@drawable/ic_person"/>
+</menu>
