@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:id="@+id/textViewAtividade"
+        style="@style/titleText"
+        android:textSize="35sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="Atividade"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAnteriores"
+        style="@style/defaultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Anteriores"
+        android:textColor="#666666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAtividade" />
+
+    <!-- Menu Bar -->
+    <LinearLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="bottom|center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="10dp"
+        android:background="#F5F5F5">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="#DFDFDF" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/homeButton">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Página Inicial"
+                    app:srcCompat="@drawable/icon_home" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Página Inicial"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/configButton">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_option"
+                    android:contentDescription="Configurações"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opções"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/activityButton">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_activity"
+                    android:contentDescription="Atividades"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atividades"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/accountButton">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_account"
+                    android:contentDescription="Perfil"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perfil"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAnteriores"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/footerLayout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewViagem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewMapa1"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:background="#EEEEEE"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/example_map" />
+
+                    <TextView
+                        android:id="@+id/textViewEndereco1"
+                        style="@style/defaultText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Avenida da Liberdade, 532 - Liberdade"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageViewMapa1" />
+
+                    <TextView
+                        android:id="@+id/textViewDataHora1"
+                        style="@style/minimumText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="2 de mar. · 22:02"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewEndereco1" />
+
+                    <TextView
+                        android:id="@+id/textViewValor1"
+                        style="@style/minimumText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="R$20,00"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewDataHora1" />
+
+                    <TextView
+                        android:id="@+id/buttonRefazer1"
+                        style="@style/defaultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/background_grey"
+                        android:drawableStart="@drawable/icon_arrow_loop"
+                        android:drawablePadding="7dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="14dp"
+                        android:text="Refazer"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewValor1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewViagem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewCarro2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerInside"
+                        android:background="#EEEEEE"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/icon_car" />
+
+                    <TextView
+                        android:id="@+id/textViewEndereco2"
+                        style="@style/defaultText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Avenida da Liberdade, 532 ..."
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonRefazer2"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewDataHora2"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="2 de mar. · 22:02"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro2"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewEndereco2" />
+
+                    <TextView
+                        android:id="@+id/textViewValor2"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="R$20,00"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro2"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewDataHora2" />
+
+                    <TextView
+                        android:id="@+id/buttonRefazer2"
+                        style="@style/defaultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/background_grey"
+                        android:drawableStart="@drawable/icon_arrow_loop"
+                        android:drawablePadding="7dp"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="14dp"
+                        android:text="Refazer"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.466" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewViagem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewCarro3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="#EEEEEE"
+                        android:scaleType="centerInside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/icon_car" />
+
+                    <TextView
+                        android:id="@+id/textViewEndereco3"
+                        style="@style/defaultText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Avenida da Liberdade, 532 ..."
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonRefazer3"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro3"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewDataHora3"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="2 de mar. · 22:02"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro3"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewEndereco3" />
+
+                    <TextView
+                        android:id="@+id/textViewValor3"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="R$20,00"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro3"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewDataHora3" />
+
+                    <TextView
+                        android:id="@+id/buttonRefazer3"
+                        style="@style/defaultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/background_grey"
+                        android:drawableStart="@drawable/icon_arrow_loop"
+                        android:drawablePadding="7dp"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="14dp"
+                        android:text="Refazer"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.466" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewViagem4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewCarro4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="#EEEEEE"
+                        android:scaleType="centerInside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/icon_car" />
+
+                    <TextView
+                        android:id="@+id/textViewEndereco4"
+                        style="@style/defaultText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Avenida da Liberdade, 532 ..."
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonRefazer4"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewDataHora4"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="2 de mar. · 22:02"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro4"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewEndereco4" />
+
+                    <TextView
+                        android:id="@+id/textViewValor4"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="R$20,00"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro4"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewDataHora4" />
+
+                    <TextView
+                        android:id="@+id/buttonRefazer4"
+                        style="@style/defaultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/background_grey"
+                        android:drawableStart="@drawable/icon_arrow_loop"
+                        android:drawablePadding="7dp"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="14dp"
+                        android:text="Refazer"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.466" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewViagem5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewCarro5"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="#EEEEEE"
+                        android:scaleType="centerInside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/icon_car" />
+
+                    <TextView
+                        android:id="@+id/textViewEndereco5"
+                        style="@style/defaultText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Avenida da Liberdade, 532 ..."
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/buttonRefazer5"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textViewDataHora5"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="2 de mar. · 22:02"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro5"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewEndereco5" />
+
+                    <TextView
+                        android:id="@+id/textViewValor5"
+                        style="@style/minimumText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginStart="10dp"
+                        android:text="R$20,00"
+                        android:textColor="#000000"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewCarro5"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewDataHora5" />
+
+                    <TextView
+                        android:id="@+id/buttonRefazer5"
+                        style="@style/defaultText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/background_grey"
+                        android:drawableStart="@drawable/icon_arrow_loop"
+                        android:drawablePadding="7dp"
+                        android:gravity="center"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="14dp"
+                        android:text="Refazer"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.466" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@android:color/transparent"
+                android:layout_marginBottom="16dp" />
+       </LinearLayout>
+   </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

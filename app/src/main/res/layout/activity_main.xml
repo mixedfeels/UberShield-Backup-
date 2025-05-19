@@ -69,114 +69,123 @@
 
     </LinearLayout>
 
+    <!-- Menu Bar -->
     <LinearLayout
         android:id="@+id/footerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical" android:gravity="bottom|center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="10dp"
+        android:background="#F5F5F5">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:background="#DFDFDF" />
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:id="@+id/homeButtonContainer">
+            android:orientation="horizontal" android:gravity="center_horizontal">
 
-            <ImageButton
-                android:id="@+id/homeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="Página Inicial"
-                app:srcCompat="@drawable/icon_home" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Página Inicial"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/homeButton">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:id="@+id/configButtonContainer">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Página Inicial"
+                    app:srcCompat="@drawable/icon_home" />
 
-            <ImageButton
-                android:id="@+id/configButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_option"
-                android:contentDescription="Configurações"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Página Inicial"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Opções"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/configButton">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:id="@+id/activityButtonContainer">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_option"
+                    android:contentDescription="Configurações"/>
 
-            <ImageButton
-                android:id="@+id/activityButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_activity"
-                android:contentDescription="Atividades"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opções"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Atividades"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/activityButton">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:id="@+id/accountButtonContainer">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_activity"
+                    android:contentDescription="Atividades"/>
 
-            <ImageButton
-                android:id="@+id/accountButton"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icon_account"
-                android:contentDescription="Perfil"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atividades"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:id="@+id/accountButton">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icon_account"
+                    android:contentDescription="Perfil"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perfil"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

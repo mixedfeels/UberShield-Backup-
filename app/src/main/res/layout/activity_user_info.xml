@@ -13,22 +13,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/icon_arrow_left"
         android:contentDescription="Voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Título superior -->
-
-    <!-- Imagem Usuário -->
     <TextView
         android:id="@+id/tituloConta"
         style="@style/titleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Informações pessoais"
         android:textColor="#000000"
@@ -37,6 +35,7 @@
         app:layout_constraintStart_toEndOf="@id/btnVoltar"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Imagem Usuário -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageButton3"
         android:layout_width="100dp"
@@ -172,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="+55 11 99999-9999"
+                    android:text="11 999999999"
                     android:textColor="#555" />
             </LinearLayout>
 

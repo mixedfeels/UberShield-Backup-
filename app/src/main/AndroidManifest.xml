@@ -21,19 +21,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".network.frontend.UserNameActivity"
-            android:exported="false" />
-        <activity
-            android:name=".network.frontend.UserGenerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".network.frontend.UserEmailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".network.frontend.IdiomaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".network.frontend.UserPhoneActivity"
+            android:name=".network.frontend.HistoryActivity"
             android:exported="false" />
 
         <meta-data
@@ -59,13 +47,31 @@
             android:name=".network.frontend.RegisterActivity"
             android:exported="true" />
         <activity
+            android:name=".network.frontend.MapsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.UserInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.UserNameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.UserGenerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.UserEmailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.IdiomaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.UserPhoneActivity"
+            android:exported="true" />
+        <activity
             android:name=".network.frontend.AppConfigActivity"
             android:exported="true" />
         <activity
             android:name=".network.frontend.UserConfigActivity"
-            android:exported="true" />
-        <activity
-            android:name=".network.frontend.MapsActivity"
             android:exported="true" />
     </application>
 
