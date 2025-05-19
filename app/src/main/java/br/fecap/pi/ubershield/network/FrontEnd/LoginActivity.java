@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString().trim();
 
                 if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Por favor preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
                     fazerLoginFinal(username, password); // Chama a função de login
                 }

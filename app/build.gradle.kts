@@ -62,4 +62,10 @@ dependencies {
     implementation("com.google.android.libraries.places:places:2.7.0")
     implementation("com.google.android.gms:play-services-places:17.0.0")
     implementation ("androidx.biometric:biometric:1.1.0")
+
+    // Animação
+    implementation("com.airbnb.android:lottie:6.1.0")
+
+    // Imagem
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }

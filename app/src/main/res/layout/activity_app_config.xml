@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context="br.fecap.pi.ubershield.FrontEnd.AppConfigActivity">
+    android:background="#F5F5F5"
+    tools:context="br.fecap.pi.ubershield.frontend.AppConfigActivity">
 
     <ImageView
         android:id="@+id/uberLogo"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
+            android:background="@drawable/background_white"
             android:hint="ainda n fiz nada"
             android:gravity="center"
             android:textColor="#B8000000"
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
+            android:background="@drawable/background_white"
             android:hint="aqui..."
             android:gravity="center"
             android:textColor="#B8000000"
@@ -59,7 +59,7 @@
             android:id="@+id/btnVoltarApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_btn_background"
+            android:background="@drawable/background_black"
             android:text="Voltar"
             android:textColor="@android:color/white"
             app:backgroundTint="@null"

@@ -36,7 +36,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="32dp"
-            android:background="@drawable/account_icon"
+            android:background="@drawable/icon_account_line"
             android:contentDescription="Foto de Perfil"
             android:src="@drawable/default_profile"
             app:layout_constraintEnd_toEndOf="parent"

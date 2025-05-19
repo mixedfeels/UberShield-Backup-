@@ -7,10 +7,9 @@
     android:theme="@style/Theme.UberShield"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F5F5F5"
     tools:context="br.fecap.pi.ubershield.FrontEnd.MainActivity">
 
-    <!-- Header Section: User photo and settings -->
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
@@ -23,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- User's photo -->
         <ImageView
             android:id="@+id/userPhoto"
             android:layout_width="40dp"
@@ -32,7 +30,6 @@
             android:contentDescription="@string/foto_do_usuario"
             android:src="@drawable/profile_circle" />
 
-        <!-- Username -->
         <TextView
             android:id="@+id/userName"
             style="@style/UserNameStyle"
@@ -44,9 +41,6 @@
 
     </LinearLayout>
 
-    <!-- Main Content Section -->
-
-    <!-- Footer Section -->
     <LinearLayout
         android:id="@+id/mapViewLayout"
         android:layout_width="0dp"
@@ -54,28 +48,18 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/footerLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
-
-        <!-- MapView -->
-        <!-- <com.google.android.gms.maps.MapView
-            android:id="@+id/MapaRisco"
-            android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:layout_marginBottom="16dp" /> -->
-
-        <!-- Texto até decidir o Mapa/Risco ou aviso geral -->
         <EditText
             android:id="@+id/avisoGeral"
             android:layout_width="match_parent"
             android:layout_height="340dp"
-            android:background="#e6e6e6"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:background="#e6e6e6" />
 
-        <!-- Button to Proceed -->
         <Button
             android:id="@+id/buttonProsseguir"
             style="@style/ButtonPrimary"
@@ -83,56 +67,116 @@
             android:layout_height="wrap_content"
             android:text="@string/prosseguir_viagem" />
 
-        <!-- TextView showing status -->
-        <!-- <TextView
-            android:id="@+id/textProblemasViagem"
-            style="@style/StatusText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="problemas encontrados na sua viagem:"
-            android:textColor="?android:attr/textColorPrimary" /> -->
-
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/footerLayout"
-        android:layout_width="408dp"
-        android:layout_height="60dp"
-        android:gravity="bottom|end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="bottom|center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapViewLayout"
-        app:layout_constraintVertical_bias="0.979">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/accountButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/account_icon"
-            android:contentDescription="Perfil"/>
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:id="@+id/homeButtonContainer">
 
-        <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/home_icon"
-            android:contentDescription="Início"/>
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Página Inicial"
+                app:srcCompat="@drawable/icon_home" />
 
-        <ImageButton
-            android:id="@+id/configButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Página Inicial"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_settings"
-            android:contentDescription="Configurações"/>
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:id="@+id/configButtonContainer">
+
+            <ImageButton
+                android:id="@+id/configButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/icon_option"
+                android:contentDescription="Configurações"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opções"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:id="@+id/activityButtonContainer">
+
+            <ImageButton
+                android:id="@+id/activityButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/icon_activity"
+                android:contentDescription="Atividades"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Atividades"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:id="@+id/accountButtonContainer">
+
+            <ImageButton
+                android:id="@+id/accountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/icon_account"
+                android:contentDescription="Perfil"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

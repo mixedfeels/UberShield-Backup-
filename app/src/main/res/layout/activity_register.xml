@@ -4,19 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#F5F5F5"
     tools:context="br.fecap.pi.ubershield.FrontEnd.LoginActivity">
 
-    <ImageView
-        android:id="@+id/uberLogoLoginPG"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@null"
+    <!-- Logo -->
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/background_logo"
         app:layout_constraintBottom_toTopOf="@+id/loginLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/uber" />
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/logo_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_short_name"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/uber_move_medium"
+            android:textSize="45sp"
+            android:gravity="center" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/loginLayout"
@@ -35,14 +47,16 @@
 
         <EditText
             android:id="@+id/RegisterUsername"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/account_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_account_line"
+            android:paddingStart="20dp"
+            android:paddingEnd="40dp"
+            android:elevation="2dp"
             android:ems="10"
             android:gravity="center"
             android:hint="Usuário"
@@ -50,18 +64,21 @@
             android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#A0161111"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="Autofill,HardcodedText" />
 
         <EditText
             android:id="@+id/RegisterEmail"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/account_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_email"
+            android:paddingStart="20dp"
+            android:paddingEnd="40dp"
+            android:elevation="2dp"
             android:ems="10"
             android:gravity="center"
             android:hint="Email"
@@ -69,19 +86,22 @@
             android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#A0161111"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="Autofill,HardcodedText,TextFields" />
 
         <EditText
             android:id="@+id/RegisterSenha"
             android:layout_width="match_parent"
+            style="@style/defaultText"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/password_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_password"
+            android:paddingStart="22dp"
+            android:paddingEnd="42dp"
             android:ems="0"
+            android:elevation="2dp"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
@@ -90,53 +110,46 @@
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#A0161111"
             android:textSize="16sp"
-            tools:layout_marginBottom="15dp" />
+            tools:layout_marginBottom="15dp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/RegisterConfirmarSenha"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/password_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_password"
+            android:paddingStart="22dp"
+            android:paddingEnd="42dp"
+            android:elevation="2dp"
             android:ems="0"
             android:gravity="center"
-            android:hint="Digite a Senha Novamente"
+            android:hint="Confirmar Senha"
             android:inputType="textPassword"
             android:textAlignment="center"
             android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#A0161111"
             android:textSize="16sp"
-            tools:layout_marginBottom="15dp" />
+            tools:layout_marginBottom="15dp"
+            tools:ignore="Autofill,HardcodedText" />
 
         <Button
             android:id="@+id/login_btn"
+            style="@style/titleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/login_btn_background"
-            android:hint="Registrar"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/background_black"
+            android:hint="Registrar-se"
             android:textColor="@color/white"
             android:textColorHint="#ffffff"
             app:backgroundTint="@null"
-            app:iconTint="@null" />
-
+            app:iconTint="@null"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txtFooter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/powered_by"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/loginLayout"
-        app:layout_constraintStart_toStartOf="@+id/loginLayout"
-        app:layout_constraintTop_toBottomOf="@+id/loginLayout" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

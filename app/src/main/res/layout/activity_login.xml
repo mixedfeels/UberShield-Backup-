@@ -4,20 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#F5F5F5"
     tools:context="br.fecap.pi.ubershield.FrontEnd.LoginActivity">
 
-    <ImageView
-        android:id="@+id/uberLogoLoginPG"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:background="@null"
+    <!-- Logo -->
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/background_logo"
         app:layout_constraintBottom_toTopOf="@+id/loginLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/uber"
-        />
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/logo_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_short_name"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/uber_move_medium"
+            android:textSize="45sp"
+            android:gravity="center" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/loginLayout"
@@ -36,76 +47,71 @@
 
         <EditText
             android:id="@+id/Username"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/account_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_account_line"
+            android:elevation="2dp"
             android:ems="10"
             android:gravity="center"
             android:hint="Usuário"
             android:inputType="text"
-            android:textColor="#B8000000"
+            android:paddingLeft="20dp"
+            android:paddingRight="40dp"
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#B8000000"
-            android:textSize="16sp" />
+            android:translationZ="2dp"
+            tools:ignore="Autofill,HardcodedText" />
 
         <EditText
             android:id="@+id/RegisterSenha"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/edittex_background"
-            android:drawableStart="@drawable/password_icon"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:background="@drawable/background_white"
+            android:drawableStart="@drawable/icon_password"
+            android:elevation="2dp"
             android:ems="0"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:paddingLeft="22dp"
+            android:paddingRight="42dp"
             android:textAlignment="center"
-            android:textColor="#B8000000"
             android:textColorHighlight="@android:color/darker_gray"
             android:textColorHint="#B8000000"
-            android:textSize="16sp"
-            tools:hint="Senha"
-            tools:layout_marginBottom="15dp" />
+            android:translationZ="2dp"
+            tools:layout_marginBottom="15dp"
+            tools:ignore="Autofill,HardcodedText"/>
 
         <Button
             android:id="@+id/login_btn"
+            style="@style/titleText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/login_btn_background"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/background_black"
             android:text="@string/login"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             app:backgroundTint="@null"
             app:iconTint="@null" />
 
         <Button
             android:id="@+id/register_btn"
+            style="@style/defaultText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#0000"
+            android:layout_marginTop="20dp"
+            android:background="#F5F5F5"
             android:text="@string/register_prompt"
-            android:textColor="@android:color/white"
-            app:backgroundTint="@null" />
-
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:backgroundTint="#F5F5F5" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txtFooter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/powered_by"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/loginLayout"
-        app:layout_constraintStart_toStartOf="@+id/loginLayout"
-        app:layout_constraintTop_toBottomOf="@+id/loginLayout" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">UberShield</string>
+    <string name="app_short_name">Shield</string>
     <string name="login">Login</string>
     <string name="register_prompt">Não tem uma conta? Registre-se</string>
     <string name="powered_by">Powered by Grupo 18</string>
@@ -12,6 +13,4 @@
     <string name="proceed_trip_button">Deseja prosseguir com a viagem?</string>
     <string name="api_key">AIzaSyARuNKyt_ap96fMqPMQmiNKomH2DjPfjlM</string>
     <string name="title_activity_maps">MapsActivity</string>
-
-
 </resources>

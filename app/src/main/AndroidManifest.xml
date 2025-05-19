@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" android:maxSdkVersion="29"/>
+    <uses-permission
+        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        android:maxSdkVersion="29" />
 
     <application
         android:allowBackup="true"
@@ -15,15 +18,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberShield"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".network.frontend.UserNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".network.frontend.UserGenerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".network.frontend.UserEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".network.frontend.IdiomaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".network.frontend.UserPhoneActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAImNj7rOAA2OooqZ20y-r8Jfbz9Go8gAc" />
 
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.LoginActivity"
+            android:name=".network.frontend.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,19 +50,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.MainActivity"
+            android:name=".network.frontend.LoginActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.RegisterActivity"
+            android:name=".network.frontend.MainActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.AppConfigActivity"
+            android:name=".network.frontend.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.UserConfigActivity"
+            android:name=".network.frontend.AppConfigActivity"
             android:exported="true" />
         <activity
-            android:name="br.fecap.pi.ubershield.network.frontend.MapsActivity"
+            android:name=".network.frontend.UserConfigActivity"
+            android:exported="true" />
+        <activity
+            android:name=".network.frontend.MapsActivity"
             android:exported="true" />
     </application>
 
