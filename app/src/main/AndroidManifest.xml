@@ -9,6 +9,10 @@
         android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
         android:maxSdkVersion="29" />
 
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,10 +24,6 @@
         android:theme="@style/Theme.UberShield"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".network.frontend.HistoryActivity"
-            android:exported="false" />
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyAImNj7rOAA2OooqZ20y-r8Jfbz9Go8gAc" />
@@ -33,46 +33,51 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".network.frontend.LoginActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.MainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.RegisterActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.MapsActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".network.frontend.BiometricOverlayActivity"
+            android:theme="@style/OverlayTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustResize"
+            android:label=""
+            android:exported="false"/>
+        <activity
+        android:name=".network.frontend.HistoryActivity"
+        android:exported="false" />
         <activity
             android:name=".network.frontend.UserInfoActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.UserNameActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.UserGenerActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.UserEmailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.IdiomaActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.UserPhoneActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".network.frontend.AppConfigActivity"
-            android:exported="true" />
-        <activity
-            android:name=".network.frontend.UserConfigActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
-
 </manifest>

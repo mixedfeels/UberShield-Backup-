@@ -56,4 +56,13 @@
         <item name="android:fontFamily">@font/uber_move_bold</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <!-- Tema Overlay da Biometria -->
+    <style name="OverlayTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
 </resources>

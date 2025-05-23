@@ -16,8 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 import br.fecap.pi.ubershield.R;
 
 public class MainActivity extends AppCompatActivity {
-    private Button buttonProsseguir;
-    private LinearLayout homeButton, configButton, activityButton, accountButton;
+
+    private LinearLayout searchBar, configButton, activityButton, accountButton, carLayout, boxLayout, routeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +32,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Referencia os Botões
-        homeButton = findViewById(R.id.homeButton);
-        configButton = findViewById(R.id.configButton);
         accountButton = findViewById(R.id.accountButton);
         activityButton = findViewById(R.id.activityButton);
-        buttonProsseguir = findViewById(R.id.buttonProsseguir);
+//        configButton = findViewById(R.id.configButton);
+        searchBar = findViewById(R.id.searchBar);
+        carLayout = findViewById(R.id.carLayout);
+        boxLayout = findViewById(R.id.boxLayout);
+        routeLayout = findViewById(R.id.routeLayout);
 
         // Trocando Telas
-        homeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-        });
-
 //        configButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, UserConfigActivity.class);
+//            Intent intent = new Intent(MainActivity.this, AppConfigActivity.class);
 //            startActivity(intent);
 //        });
 
@@ -59,9 +56,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        buttonProsseguir.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
-        });
+        View.OnClickListener commonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        };
+
+        // Todos levam para o Mapa
+        routeLayout.setOnClickListener(commonClickListener);
+        boxLayout.setOnClickListener(commonClickListener);
+        carLayout.setOnClickListener(commonClickListener);
+        searchBar.setOnClickListener(commonClickListener);
     }
 }

@@ -29,7 +29,8 @@ public class UserInfoActivity extends AppCompatActivity {
         item_idioma = findViewById(R.id.item_idioma);
 
         btnVoltar.setOnClickListener(v -> {
-            finish();
+            Intent intent = new Intent(UserInfoActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         item_nome.setOnClickListener(v -> {

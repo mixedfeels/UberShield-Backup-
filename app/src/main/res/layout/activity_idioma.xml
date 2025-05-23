@@ -8,31 +8,32 @@
     android:padding="24dp"
     tools:context=".EditDadosActivity">
 
-    <!-- Ícone de voltar -->
     <ImageButton
         android:id="@+id/btnVoltar"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="50.5dp"
         android:background="@drawable/icon_arrow_left"
         android:contentDescription="Voltar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Título superior -->
-    <TextView
-        android:id="@+id/tituloConta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Conta UberShield"
-        android:textColor="#000000"
-        style="@style/titleText"
-        app:layout_constraintBottom_toBottomOf="@id/btnVoltar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnVoltar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título principal -->
+    <TextView
+        android:id="@+id/tituloConta"
+        style="@style/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Conta UberShield"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/btnVoltar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="@+id/btnVoltar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnVoltar"
+        tools:ignore="RtlSymmetry" />
+
     <TextView
         android:id="@+id/tituloNome"
         style="@style/titleText"

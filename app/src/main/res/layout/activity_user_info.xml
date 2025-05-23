@@ -1,282 +1,280 @@
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/grupo_info_pessoal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Ícone de voltar -->
     <ImageButton
         android:id="@+id/btnVoltar"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50.5dp"
         android:background="@drawable/icon_arrow_left"
         android:contentDescription="Voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título superior -->
     <TextView
         android:id="@+id/tituloConta"
         style="@style/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
+        android:layout_width="0dp" android:layout_height="wrap_content"
         android:text="Informações pessoais"
         android:textColor="#000000"
+        android:gravity="center"
+        android:layout_marginEnd="24dp"
         android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/btnVoltar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnVoltar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="@+id/btnVoltar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnVoltar"
+        tools:ignore="RtlSymmetry" />
 
-    <!-- Imagem Usuário -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageButton3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/user_image"
         app:civ_border_color="#FF000000"
         app:civ_border_width="0dp"
-        app:civ_circle_background_color="#FFFFFF" />
-
-    <LinearLayout
+        app:civ_circle_background_color="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar" /> <LinearLayout
+        android:id="@+id/linearLayoutContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="200dp"
-        android:orientation="vertical">
+        android:layout_height="0dp" android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <RelativeLayout
-            android:id="@+id/item_nome"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="16dp">
+    <RelativeLayout
+        android:id="@+id/item_nome"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/titulo_nome"
-                    style="@style/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome" />
-
-                <TextView
-                    android:id="@+id/valor_nome"
-                    style="@style/defaultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Antônio Álvares"
-                    android:textColor="#555" />
-
-            </LinearLayout>
-
-            <ImageView
+            <TextView
+                android:id="@+id/titulo_nome"
+                style="@style/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/icon_arrow_right" />
-        </RelativeLayout>
+                android:text="Nome" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#E0E0E0" />
-
-        <RelativeLayout
-            android:id="@+id/item_genero"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="16dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/titulo_genero"
-                    style="@style/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gênero" />
-
-                <TextView
-                    android:id="@+id/valor_genero"
-                    style="@style/defaultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Masculino"
-                    android:textColor="#555" />
-            </LinearLayout>
-
-            <ImageView
+            <TextView
+                android:id="@+id/valor_nome"
+                style="@style/defaultText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/icon_arrow_right" />
-        </RelativeLayout>
+                android:layout_marginTop="10dp"
+                android:text="Antônio Álvares"
+                android:textColor="#555" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#E0E0E0" />
+        </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/item_telefone"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="16dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_arrow_right" />
+    </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0" />
 
-                <TextView
-                    android:id="@+id/titulo_telefone"
-                    style="@style/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Número de telefone" />
+    <RelativeLayout
+        android:id="@+id/item_genero"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp">
 
-                <TextView
-                    android:id="@+id/valor_telefone"
-                    style="@style/defaultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="11 999999999"
-                    android:textColor="#555" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-            <ImageView
+            <TextView
+                android:id="@+id/titulo_genero"
+                style="@style/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/icon_arrow_right" />
-        </RelativeLayout>
+                android:text="Gênero" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#E0E0E0" />
-
-        <RelativeLayout
-            android:id="@+id/item_email"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="16dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/titulo_email"
-                    style="@style/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="E-mail" />
-
-                <TextView
-                    android:id="@+id/valor_email"
-                    style="@style/defaultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="antonio.alvares@email.com"
-                    android:textColor="#555" />
-            </LinearLayout>
-
-            <ImageView
+            <TextView
+                android:id="@+id/valor_genero"
+                style="@style/defaultText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/icon_arrow_right" />
-        </RelativeLayout>
+                android:layout_marginTop="10dp"
+                android:text="Masculino"
+                android:textColor="#555" />
+        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#E0E0E0" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_arrow_right" />
+    </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/item_idioma"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginTop="16dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/item_telefone"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp">
 
-                <TextView
-                    android:id="@+id/titulo_idioma"
-                    style="@style/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Idioma" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/valor_idioma"
-                    style="@style/defaultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Atualizar idioma do dispositivo"
-                    android:textColor="#555" />
-            </LinearLayout>
-
-            <ImageView
+            <TextView
+                android:id="@+id/titulo_telefone"
+                style="@style/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/icon_arrow_right" />
-        </RelativeLayout>
+                android:text="Número de telefone" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#E0E0E0" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/valor_telefone"
+                style="@style/defaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="11 999999999"
+                android:textColor="#555" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0" />
+
+    <RelativeLayout
+        android:id="@+id/item_email"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titulo_email"
+                style="@style/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-mail" />
+
+            <TextView
+                android:id="@+id/valor_email"
+                style="@style/defaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="antonio.alvares@email.com"
+                android:textColor="#555" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0" />
+
+    <RelativeLayout
+        android:id="@+id/item_idioma"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titulo_idioma"
+                style="@style/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Idioma" />
+
+            <TextView
+                android:id="@+id/valor_idioma"
+                style="@style/defaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Atualizar idioma do dispositivo"
+                android:textColor="#555" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icon_arrow_right" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#E0E0E0" />
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

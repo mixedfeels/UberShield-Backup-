@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    tools:context="br.fecap.pi.ubershield.frontend.AppConfigActivity">
+    tools:context=".network.frontend.AappConfigActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

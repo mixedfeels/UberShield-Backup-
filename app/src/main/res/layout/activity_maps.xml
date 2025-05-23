@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Fragmento do Mapa -->
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <!-- Botão de Configurações -->
+    <ImageButton
+        android:id="@+id/optionButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="280dp"
+        android:background="@drawable/background_shield"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:padding="2dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_settings"
+        android:stateListAnimator="@null" />
+
+    <!-- Botão de Emergência -->
+    <ImageButton
         android:id="@+id/safetyButton"
-        android:layout_width="363dp"
-        android:layout_height="537dp"
-        android:text="NAO MUDA O ID DO BOTAOOOOOOOOO" />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="230dp"
+        android:background="@drawable/background_shield"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_shield"
+        android:stateListAnimator="@null" />
 
     <!-- Fragmento de Pesquisa ainda não funcional -->
     <!-- <fragment

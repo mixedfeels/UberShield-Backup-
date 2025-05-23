@@ -1,12 +1,10 @@
 package br.fecap.pi.ubershield.network.backend;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
+import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
+import br.fecap.pi.ubershield.network.frontend.BiometricOverlayActivity;
 
 public class UberShieldService {
 
@@ -23,47 +21,29 @@ public class UberShieldService {
         this.biometricAuth = new BiometricAuth(context);
     }
 
-    // Inicia a verificação de segurança
+    // Método principal para iniciar a verificação de segurança
     public void startSafetyCheck() {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            AlertDialog dialog = new AlertDialog.Builder(context)
-                    .setTitle("Verificação de Segurança")
-                    .setMessage("Você está bem?")
-                    .setCancelable(false)
-                    .setPositiveButton("Sim", (d, w) -> startBiometricVerification())
-                    .setNegativeButton("Não", (d, w) -> triggerEmergencyProtocol())
-                    .create();
-            dialog.show();
-        });
+        Log.d(TAG, "Iniciando verificação de segurança - Abrindo BiometricOverlayActivity.");
+        // Iniciamos a BiometricOverlayActivity
+        Intent intent = new Intent(context, br.fecap.pi.ubershield.network.frontend.BiometricOverlayActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
-    // Inicia a verificação biométrica usando a classe BiometricAuth
-    private void startBiometricVerification() {
-        biometricAuth.showBiometricPrompt(new BiometricAuth.AuthCallback() {
-            @Override
-            public void onSuccess() {
-                Log.d(TAG, "Biometria autenticada com sucesso.");
-                Toast.makeText(context, "Verificação bem-sucedida!", Toast.LENGTH_SHORT).show();
-                failedAttempts = 0;
-            }
-
-            @Override
-            public void onFailure() {
-                failedAttempts++;
-                Log.d(TAG, "Falha na autenticação biométrica. Tentativas: " + failedAttempts);
-                if (failedAttempts >= 2) {
-                    triggerEmergencyProtocol();
-                } else {
-                    Toast.makeText(context, "Falha na autenticação. Tente novamente.", Toast.LENGTH_SHORT).show();
-                    startBiometricVerification(); // Tenta novamente
-                }
-            }
-        });
+    // Permitindo que a BiometricOverlayActivity chame essas funções
+    public BiometricAuth getBiometricAuth() {
+        return biometricAuth;
     }
 
-    // Aciona o protocolo de emergência
-    private void triggerEmergencyProtocol() {
-        Log.d(TAG, "Executando protocolo de emergência. Enviando mensagens aos contatos.");
-        contactManager.sendAlertToContacts("🚨 ALERTA DE EMERGÊNCIA! O usuário pode estar em perigo.");
+    public EmergencyContactManager getEmergencyContactManager() {
+        return contactManager;
+    }
+
+    public void onBiometricSuccess() {
+        Log.d(TAG, "Biometria confirmada na overlay.");
+    }
+
+    public void onBiometricFailedPermanently() {
+        Log.d(TAG, "Biometria falhou após várias tentativas ou cancelamento.");
     }
 }
